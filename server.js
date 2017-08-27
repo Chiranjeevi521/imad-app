@@ -33,7 +33,7 @@ var pool = new Pool(config);
 app.get('/test-db', function(){
     // Make a request
     // Return data
-    pool.query('SELECT * FROM test', function(){
+    pool.query('SELECT * FROM test', function(err, result){
         
         if(err){
             res.status(500).send(err.toString());
