@@ -30,7 +30,7 @@ app.get('/article-two', function(req, res){
 });
 
 var pool = new Pool(config);
-app.get('/test-db', function(){
+app.get('/test-db', function(req, res){
     // Make a request
     // Return data
     pool.query('SELECT * FROM test', function(err, result){
