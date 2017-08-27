@@ -101,8 +101,17 @@ function createTemplate(data){
                 <h3>
                     ${heading}
                 <h3/>
-    
-};
+                <div>
+                    ${date.toDateString()}
+                </div>
+                <div>
+                    ${content}
+                </div>
+            </div>
+        </body>
+    </html>
+    `;
+}
 
 
 // Do not change port, otherwise your app won't run on IMAD servers
