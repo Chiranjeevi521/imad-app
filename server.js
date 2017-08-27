@@ -2,6 +2,7 @@ var express = require('express');
 var morgan = require('morgan');
 var path = require('path');
 var Pool = require('pg').Pool;
+var crypto = require('crypto');
 
 var config = {
     
@@ -17,11 +18,6 @@ app.use(morgan('combined'));
 
 app.get('/', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'index.html'));
-});
-
-app.get('/article-one', function(req, res){
-    
-    res.sendFile(path.join(__dirname, 'ui', 'article-one.html'));
 });
 
 app.get('/articles/:articleName', function(req, res){
@@ -44,10 +40,6 @@ app.get('/articles/:articleName', function(req, res){
     });
 });
 
-app.get('/article-two', function(req, res){
-    
-    res.sendFile(path.join(__dirname, 'ui', 'article-two.html'));
-});
 
 var pool = new Pool(config);
 app.get('/test-db', function(req, res){
@@ -64,11 +56,6 @@ app.get('/test-db', function(req, res){
     });
 });
 
-app.get('/article-three', function(req, res){
-    
-    res.sendFile(path.join(__dirname, 'ui', 'article-three.html'));
-});
-
 app.get('/ui/style.css', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'style.css'));
 });
@@ -76,6 +63,19 @@ app.get('/ui/style.css', function (req, res) {
 app.get('/ui/madi.png', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'madi.png'));
 });
+
+function hash (input){
+    //How to create Hash
+    var hashed = crypto.pbkdf2Sync(input, salt, 10000, 512, 'sha512');
+    return hashed.toString('hex');
+    
+}
+
+app.get('/hash/:input', function(req, res){
+    var hashedString = hash(req.params.input);
+    res.send(hashedString);
+});
+
 
 function createTemplate(data){
     var title = data.title;
