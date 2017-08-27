@@ -42,7 +42,6 @@ app.get('/test-db', function(){
         }
         
     });
-    
 });
 
 app.get('/article-three', function(req, res){
