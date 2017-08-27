@@ -24,7 +24,7 @@ app.get('/article-one', function(req, res){
     res.sendFile(path.join(__dirname, 'ui', 'article-one.html'));
 });
 
-app.get('/articles/:articleName', function(req, res){
+app.get('/articles/article-one', function(req, res){
     
     //var articleName = req.params.articleName;
     
